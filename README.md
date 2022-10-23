@@ -1,24 +1,18 @@
-# Atmospheric Science Tools (AtmSciTools)
+# Parsivel 2 Disdrometer datalogger (parsivel2_datalogger)
 
-This toolkit provides a collection of tools for Atmospheric Science Research.
+Provides a reliable and simple datalogger for the parsivel 2 disdrometer.
 
 ### Dependencies
-- numpy
-- netCDF4
-- scipy
-- matplotlib
-- paramiko
+- pyserial
 
 
 ### Install
-To install AtmSciTools, you can either download and unpack the zip file of the source code or
-use git to check out the repository:
-
-`git clone git@github.com:ackermannluis/AtmSciTools.git`
+`git clone git@github.com:ackermannluis/parsivel2_datalogger.git`
 
 To install in your home directory, use:
 
 `python setup.py install --user`
 
 ### Use
-- [Examples](https://github.com/ackermannluis/AtmSciTools)
+- just run on the terminal by navegating to the source folder and running:
+`python parsivel_datalogger_main.py`
