@@ -1,4 +1,4 @@
-"""A setuptools based setup module.
+"""A script to log data from a parsivel 2 disdrometer.
 See:
 https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
@@ -16,12 +16,12 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="atmscitools",
-    version="1.37.0",
-    description="Atmospheric Science Tools",
+    name="parsivel2_datalogger",
+    version="1.0.0",
+    description="datalogger for parsivel 2 disdrometer",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ackermannluis/AtmSciTools",
+    url="https://github.com/ackermannluis/parsivel2_datalogger",
     author="Luis Ackermann",
     author_email="ackermann.luis@gmail.com",  # Optional
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -38,7 +38,6 @@ setup(
     package_data={'': ['*.nc','cdsapirc']},
     keywords="weather meteorology instrumentation",
     packages=find_packages(exclude=["contrib", "docs", "tests", "notebooks"]),
-    install_requires=["scp", "xlrd", "imageio", "pyproj", "requests", "numpy", "netCDF4", "scipy", "paramiko",
-                      "matplotlib", 'Pillow', 'pdf2image'],
-    project_urls={"Source": "https://github.com/ackermannluis/AtmSciTools/",},
+    install_requires=["pyserial"],
+    project_urls={"Source": "https://github.com/ackermannluis/parsivel2_datalogger/",},
 )
