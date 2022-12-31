@@ -14,7 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys, glob, time, os
+import sys
+import glob
+import time
+import os
 import ftplib
 import serial
 from threading import Thread
@@ -25,6 +28,9 @@ port_ = '/dev/ttyUSB1'
 
 # place an empty file named __findmePAR__ inside this directory in the folder where you want the files to be saved
 output_path_base = '/media/pi/'
+
+# define file prefix
+file_prefix = 'PAR_'
 
 # if enabled, the data will be also sent to the specified ftp on the start of a new day
 enable_ftp_export = False
@@ -53,7 +59,6 @@ def ftp_put_file(local_filename, remote_path,
             ftp.quit()
         except:
             pass
-        
 def ftp_get_file(remote_filename, local_path,
                  host_name=None, user_name=None, password_=None):
     from pathlib import Path
@@ -81,9 +86,7 @@ def list_files_recursive(path_, filter_str=None):
                     filename_ = os.path.join(r, file)
                     file_list.append(filename_.replace('\\', '/'))
     return sorted(file_list)
-
 def log_status(text_):
-    output_path = list_files_recursive('/media/pi/', '__findmePAR__')[0][:-13]
     status_log_filename = output_path + 'status_log.txt'
     if os.path.isfile(status_log_filename):
         with open(status_log_filename, 'a') as file_:
@@ -91,7 +94,6 @@ def log_status(text_):
     else:
         with open(status_log_filename, 'w') as file_:
             file_.write(str(text_) + '\n')
-
 def list_available_serial_ports():
     """ Lists serial port names
 
@@ -118,8 +120,9 @@ def list_available_serial_ports():
             pass
     return result
 
+
 time.sleep(10)
-output_path = list_files_recursive(output_path_base, '__findmePAR__')[0][:-13] + 'PAR_'
+output_path = list_files_recursive(output_path_base, '__findmePAR__')[0][:-13] + file_prefix
 
 
 com_ports_list = list_available_serial_ports()
