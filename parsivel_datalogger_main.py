@@ -38,6 +38,9 @@ ftp_hostname = ''
 ftp_username = ''
 ftp_password = ''
 ftp_path     = '/'
+
+# enable this to print status to terminal instead of status file
+debug_ = False
 # ################################################  USER VARIABLES  #################################################
 
 
@@ -87,13 +90,16 @@ def list_files_recursive(path_, filter_str=None):
                     file_list.append(filename_.replace('\\', '/'))
     return sorted(file_list)
 def log_status(text_):
-    status_log_filename = output_path + 'status_log.txt'
-    if os.path.isfile(status_log_filename):
-        with open(status_log_filename, 'a') as file_:
-            file_.write(str(text_) + '\n')
+    if debug_:
+        print(text_)
     else:
-        with open(status_log_filename, 'w') as file_:
-            file_.write(str(text_) + '\n')
+        status_log_filename = output_path + 'status_log.txt'
+        if os.path.isfile(status_log_filename):
+            with open(status_log_filename, 'a') as file_:
+                file_.write(str(text_) + '\n')
+        else:
+            with open(status_log_filename, 'w') as file_:
+                file_.write(str(text_) + '\n')
 def list_available_serial_ports():
     """ Lists serial port names
 
@@ -219,8 +225,8 @@ while True:
 
 
                 log_status(txt_list[0] +
-                           'precipitation intensity: {0} mm/hr'.format(txt_list[2]) +
-                           'precipitation type: {0} (NWS)'.format(txt_list[6]))
+                           ' precipitation intensity: {0} mm/hr '.format(txt_list[2]) +
+                           ' precipitation type: {0} (NWS) '.format(txt_list[6]))
             else:
                 log_status('skipping time stamp as telegram was received incomplete')
 
